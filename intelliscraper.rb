@@ -61,7 +61,7 @@ if File.file?(input_file_name) && File.exist?(input_file_name)
   #Sanitizing VIN numbers by removing / - . and anything other than numbers and alphabets
   vin_numbers.each do |row|
     # puts "printing row"
-    row.gsub!(/[^0-9A-Za-z]/, '')
+    row.to_s.gsub!(/[^0-9A-Za-z]/, '')
     # puts row
   end
 
@@ -76,7 +76,7 @@ if File.file?(input_file_name) && File.exist?(input_file_name)
   CSV.open('results.csv', 'w') do |csv|
 
     while i <= vin_numbers.count
-      vin_number_output = vin_numbers[i]
+      vin_number_input = vin_numbers[i]
       agent = Mechanize.new
       page = agent.get('http://www.iihs-hldi.org/MotovinDirect.asp?ccr=EHS7N5F2F2L5&scr')
 
@@ -92,6 +92,121 @@ if File.file?(input_file_name) && File.exist?(input_file_name)
       # vin = results[6]
       # hldi_class_name = results[20]
 
+
+      #Code for VIN Output
+
+      count = 0
+      index = 0
+
+      for j in results
+
+        if j == "Output VIN"
+          index = count
+        end
+        count = count + 1
+      end
+
+      vin_number_output = results[index+1]
+
+      # puts "****** Output VIN *******"
+      # puts "Output VIN: " + vin_number_output
+
+
+      #Code for Check Digit
+
+      count = 0
+      index = 0
+
+      for j in results
+
+        if j == "Check Digit"
+          index = count
+        end
+        count = count + 1
+      end
+
+      check_digit = results[index+1]
+
+      # puts "****** Check Digit *******"
+      # puts "Check Digit: " + check_digit
+
+      #Code for Model Year
+
+      count = 0
+      index = 0
+
+      for j in results
+
+        if j == "Model"
+          index = count
+        end
+        count = count + 1
+      end
+
+      model_year = results[index+1]
+
+      # puts "****** Model Year *******"
+      # puts "Model Year: " + model_year
+
+
+      #Code for Make
+
+      count = 0
+      index = 0
+
+      for j in results
+
+        if j == "Model"
+          index = count
+        end
+        count = count + 1
+      end
+
+      make = results[index+2]
+
+      # puts "****** Make *******"
+      # puts "Make: " + make
+
+
+      #Code for Series
+
+      count = 0
+      index = 0
+
+      for j in results
+
+        if j == "Model"
+          index = count
+        end
+        count = count + 1
+      end
+
+      series = results[index+3]
+
+      # puts "****** Series *******"
+      # puts "Series: " + series
+
+
+      #Code for Model
+
+      count = 0
+      index = 0
+
+      for j in results
+
+        if j == "Model"
+          index = count
+        end
+        count = count + 1
+      end
+
+      model = results[index+4]
+
+      # puts "****** Model *******"
+      # puts "Model: " + model
+
+
+      #Code for HLDI class name
       count = 0
       index = 0
 
@@ -106,13 +221,241 @@ if File.file?(input_file_name) && File.exist?(input_file_name)
       hldi_class_name = results[index-1]
 
       # puts "****** HlDI Class Name *******"
-      puts "HLDI Class name: " + hldi_class_name
+      # puts "HLDI Class name: " + hldi_class_name
 
-      final_results.push(vin_number_output, hldi_class_name)
+      #Code for Displacement
 
-      csv << final_results
+      count = 0
+      index = 0
+
+      for j in results
+
+        if j == "Displacement"
+          index = count
+        end
+        count = count + 1
+      end
+
+      displacement = results[index+1]
+
+      # puts "****** Displacement *******"
+      # puts "Displacement: " + displacement
+
+
+      #Code for Price
+
+      count = 0
+      index = 0
+
+      for j in results
+
+        if j == "Price"
+          index = count
+        end
+        count = count + 1
+      end
+
+      price = results[index+1]
+
+      # puts "****** Price *******"
+      # puts "Price: " + price
+
+
+      #Code for Weight
+
+      count = 0
+      index = 0
+
+      for j in results
+
+        if j == "Weight"
+          index = count
+        end
+        count = count + 1
+      end
+
+      weight = results[index+1]
+
+      # puts "****** Weight *******"
+      # puts "Weight: " + weight
+
+
+      #Code for Wheelbase
+
+      count = 0
+      index = 0
+
+      for j in results
+
+        if j == "Wheelbase"
+          index = count
+        end
+        count = count + 1
+      end
+
+      wheelbase = results[index+1]
+
+      # puts "****** Wheelbase *******"
+      # puts "Wheelbase: " + wheelbase
+
+
+      #Code for ABS
+
+      count = 0
+      index = 0
+
+      for j in results
+
+        if j == "ABS"
+          index = count
+        end
+        count = count + 1
+      end
+
+      abs = results[index+1]
+
+      # puts "****** ABS *******"
+      # puts "ABS: " + abs
+
+
+      #Code for Transmission
+
+      count = 0
+      index = 0
+
+      for j in results
+
+        if j == "Transmission"
+          index = count
+        end
+        count = count + 1
+      end
+
+      transmission = results[index+1]
+
+      # puts "****** Transmission *******"
+      # puts "Transmission: " + transmission
+
+      #Code for Drive
+
+      count = 0
+      index = 0
+
+      for j in results
+
+        if j == "Transmission"
+          index = count
+        end
+        count = count + 1
+      end
+
+      drive = results[index+3]
+
+      # puts "****** Drive *******"
+      # puts "Drive: " + drive
+
+
+      #Code for Engine Type
+
+      count = 0
+      index = 0
+
+      for j in results
+
+        if j == "HorsePower"
+          index = count
+        end
+        count = count + 1
+      end
+
+      engine_type = results[index+1]
+
+      # puts "****** Engine Type *******"
+      # puts "Engine Type: " + engine_type
+
+
+      #Code for Engine Drive
+
+      count = 0
+      index = 0
+
+      for j in results
+
+        if j == "HorsePower"
+          index = count
+        end
+        count = count + 1
+      end
+
+      engine_drive = results[index+2]
+
+      # puts "****** Engine Drive *******"
+      # puts "Engine Drive: " + engine_drive
+
+
+      #Code for Torque
+
+      count = 0
+      index = 0
+
+      for j in results
+
+        if j == "Torque"
+          index = count
+        end
+        count = count + 1
+      end
+
+      torque = results[index+4]
+
+      # puts "****** Torque *******"
+      # puts "Torque: " + torque
+
+
+      #Code for HorsePower
+
+      count = 0
+      index = 0
+
+      for j in results
+
+        if j == "HorsePower"
+          index = count
+        end
+        count = count + 1
+      end
+
+      horsepower = results[index+4]
+
+      # puts "****** HorsePower *******"
+      # puts "HorsePower: " + horsepower
+
+
+      final_results.push(vin_number_input,vin_number_output, check_digit, model_year, make, series, model, hldi_class_name, displacement, price, weight, wheelbase, abs, transmission, drive, engine_type, engine_drive, torque, horsepower)
+
 
       # puts results
+
+      #Sanitizing final_results
+
+      for j in final_results
+        if j == "ENTER MOTORCYCLE VIN"
+          j.to_s.gsub!(/(ENTER MOTORCYCLE VIN)/, '')
+        end
+      end
+
+      for k in final_results
+        k.to_s.gsub!(/[^0-9A-Za-z]/, '')
+      end
+
+      # final_results.gsub!(/[^ENTER MOTORCYCLE VIN]/, '')
+
+
+      puts ""
+      puts final_results
+      puts ""
+
+      csv << final_results
 
       results.clear
       final_results.clear
